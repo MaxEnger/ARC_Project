@@ -219,9 +219,72 @@
         float: right;
         padding-top: 0.5em;
       }
+      .map-overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.8);
+        margin-right: 20px;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        border-radius: 3px;
+      }
+      #features {
+        top: 70px;
+        height: 200px;
+        margin-top: 20px;
+        width: 270px;
+      }
+  /*	FIRST NAV CSS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	*/
+  		#firstHeadNav{
+  		display: flex;
+  		background-color: #F8F9FA;
+  		}
+  		#logo1{
+  			float: left;
+  			padding: 0.5em 1em;
+  			/*div width*/
+  			flex-basis: 25%;
+  		}
+  		#logo1 img{
+  			width: 150px;
+  		}
+  		#navWrap{
+  			flex-basis: 75%;
+  		}
+  		.navItem a{
+  			padding-top: 1.5em;
+  			width: 12%;
+  			float: right;
+  			color: #767676;
+  		}
+  		.navItem a:hover, .navItem a:active{
+  			color: black;
+  		}
+  		#Coordination a{
+  			color: black;
+  		}
+      footer{
+        text-align: center;
+      }
     </style>
   </head>
   <body>
+
+    <div id="firstHeadNav">
+    <div id="logo1"><img src="redCross.png" alt="red cross logo"/></div>
+      <div id="navWrap">
+<!-- float right so please write the text backwards-->
+<div class="navItem" id="Contact"><a href="contact.html">Contact Us</a></div>
+<div class="navItem" id="Data"><a href="DataCollect.html">Data Collection</a></div>
+<div class="navItem" id="Coordination"><a href="index.html">Coordination</a></div>
+<div class="navItem" id="Deci"><a href="DecisionMaker.html">Decision Maker</a></div>
+<div class="navItem" id="Map"><a href="storyMap.html">Story Map</a></div>
+
+  </div>
+    </div>
+
+
     <div id="headerImg">
       <div id="logo"><img src="American_Red_Cross_logo.png" height="30px" width=auto alt=""/>
       </div>
@@ -250,6 +313,7 @@
       <div id='listings' class='listings'></div>
     </div>
     <div id='map' class='map'></div>
+    <!-- <div class='map-overlay' id='features'><h2>American Red Cross Region</h2><div id='pd'><p>Hover over a region!</p></div></div> -->
     </div>
     <script>
       // This will let you use the .remove() function later on
@@ -277,12 +341,45 @@
       */
       var map = new mapboxgl.Map({
         container: 'map',
-        style: "mapbox://styles/xiangyugis/ckgbz1grf4fy619r29k1ppqxq",
+        style: "mapbox://styles/xiangyugis/ckhwz1rl90cbr19of31z4m32c",
         center: [-106.9585507,41.2225205],
         zoom: 3,
         scrollZoom: true
       });
 
+        // map.getCanvas().style.cursor = 'default';
+        //
+        // map.on('mousemove', function(e) {
+        //   var states = map.queryRenderedFeatures(e.point, {
+        //     layers: ['American_Red_Cross_Regions-aexgzm']
+        //   });
+        //
+        //   if (states.length > 0) {
+        //     document.getElementById('pd').innerHTML = '<h3><strong>' + states[0].properties.region + '</strong></h3><p><strong><em>' + states[0].properties.sq_miles + '</strong> people per square mile</em></p>';
+        //   } else {
+        //     document.getElementById('pd').innerHTML = '<p>Hover over a region!</p>';
+        //   }
+        // });
+
+        map.on('load', function() {
+              map.getCanvas().style.cursor = 'default';
+              map.fitBounds([
+                  [-133.2421875, 16.972741],
+                  [-47.63671875, 52.696361]
+                ]);
+
+              map.on('mousemove', function(e) {
+                var states = map.queryRenderedFeatures(e.point, {
+                  layers: ['American_Red_Cross_Regions-aexgzm']
+                });
+
+                if (states.length > 0) {
+                  document.getElementById('pd').innerHTML = '<h3><strong>' + states[0].properties.region + '</strong></h3><p><strong><em>' + states[0].properties.sq_miles + '</strong> people per square mile</em></p>';
+                } else {
+                  document.getElementById('pd').innerHTML = '<p>Hover over a region!</p>';
+                }
+              });
+              });
       $(document).ready(function () {
         $.ajax({
           type: "GET",
@@ -298,7 +395,6 @@
           delimiter: ','
         }, function (err, data) {
           map.on('load', function () {
-
             //Add the the layer to the map
             map.addLayer({
               'id': 'csvData',
@@ -357,4 +453,9 @@
           });
     </script>
   </body>
+  <footer>
+    <p>
+      &copy; 2020 - IDCE, Clark University
+    </p>
+    </footer>
 </html>

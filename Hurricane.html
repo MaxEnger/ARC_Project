@@ -215,9 +215,58 @@
         float: right;
         padding-top: 0.5em;
       }
+  /*	FIRST NAV CSS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	*/
+      #firstHeadNav{
+      display: flex;
+      background-color: #F8F9FA;
+      }
+      #logo1{
+        float: left;
+        padding: 0.5em 1em;
+        /*div width*/
+        flex-basis: 25%;
+      }
+      #logo1 img{
+        width: 150px;
+      }
+      #navWrap{
+        flex-basis: 75%;
+      }
+      .navItem a{
+        padding-top: 1.5em;
+        width: 12%;
+        float: right;
+        color: #767676;
+      }
+      .navItem a:hover, .navItem a:active{
+        color: black;
+      }
+      #Coordination a{
+        color: black;
+      }
+      footer{
+        text-align: center;
+      }
     </style>
   </head>
   <body>
+
+    <div id="firstHeadNav">
+    <div id="logo1"><img src="redCross.png" alt="red cross logo"/></div>
+      <div id="navWrap">
+<!-- float right so please write the text backwards-->
+<div class="navItem" id="Contact"><a href="contact.html">Contact Us</a></div>
+<div class="navItem" id="Data"><a href="DataCollect.html">Data Collection</a></div>
+<div class="navItem" id="Coordination"><a href="index.html">Coordination</a></div>
+<div class="navItem" id="Deci"><a href="DecisionMaker.html">Decision Maker</a></div>
+<div class="navItem" id="Map"><a href="storyMap.html">Story Map</a></div>
+
+  </div>
+    </div>
+
+
+
+
     <div id="headerImg">
       <div id="logo"><img src="American_Red_Cross_logo.png" height="30px" width=auto alt=""/>
       </div>
@@ -477,4 +526,9 @@
       }
     </script>
   </body>
+  <footer>
+    <p>
+      &copy; 2020 - IDCE, Clark University
+    </p>
+    </footer>
 </html>
