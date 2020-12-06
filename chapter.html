@@ -56,6 +56,7 @@
         font-weight:400;
         line-height: 20px;
         padding: 20px 2px;
+        text-align: center;
       }
 
       a {
@@ -195,7 +196,7 @@
       .wrapper {
         padding-top: 1px;
         text-align:left;
-        padding-left: 4%;
+        padding-left: 12%;
           }
       .wrapper ul {
         display: inline-block;
@@ -251,6 +252,25 @@
       footer{
         text-align: center;
       }
+      #fullScreen{
+        /* margin-top: 1em; */
+        text-align: center;
+        text-decoration: none;
+        color: #E11B22;
+        width: 150px;
+        border: 2px solid #cc0000;
+        padding: 0.5em 1em;
+        background-color: #E11B22;
+      }
+      #fsbtn{
+        text-decoration: none;
+        color:#FFFFFF;
+        font-weight: bold;
+        left:0;
+      }
+      #buttonReport{
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -261,7 +281,7 @@
       <div id="navWrap">
 <!-- float right so please write the text backwards-->
 <div class="navItem" id="Contact"><a href="contact.html">Contact Us</a></div>
-<div class="navItem" id="Data"><a href="DataCollect.html">Data Collection</a></div>
+<div class="navItem" id="Data"><a href="DataCollect.html">Data Catalogue</a></div>
 <div class="navItem" id="Coordination"><a href="index.html">Incident Awareness</a></div>
 <div class="navItem" id="Deci"><a href="DecisionMaker.html">Disaster Decision</a></div>
 <div class="navItem" id="Map"><a href="storyMap.html">A New Era of Aid</a></div>
@@ -280,9 +300,7 @@
     <!-- active class displays the grey box around current page-->
   <div class="wrapper">
     <ul>
-      <li><a href="index.html" target="_self">Overview</a></li>
-      <li><a href="Wildfire.html" target="_self">Wildfire</a></li>
-      <li><a href="Hurricane.html" target="_self">Hurricane</a></li>
+      <li><a href="index.html" target="_self">Incidents</a></li>
       <li><a class="active2"href="chapter.html" target="_self">Chapter</a></li>
     </ul>
   </div>
@@ -293,7 +311,12 @@
     <div class='sidebar'>
       <div class='heading'>
         <h1>Description</h1>
-        <p>This data is showing the chapter locations of American Red Cross. This data was added to aid The American Red Cross in making decisions for improving response and providing relief for Wildfires and Hurricanes in the United States.</p>
+        <p>This data is showing the chapter locations of American Red Cross. This data was added to aid The American Red Cross in making decisions for improving response and providing relief for Wildfires and Hurricanes in the United States.
+          <br />Use the button below to update chapter site information.
+        </p>
+        <p id="buttonReport">
+            <span id="fullScreen"><a id="fsbtn" href="https://docs.google.com/spreadsheets/d/1Kt0HiUJpnnbx_pU-h-mSXU4anPSrRK1QjmdOwAHzTOQ/edit#gid=0" target="_blank">UPDATE CHAPTER STATUS</a></span>
+        </p>
         <p></br></p>
 
       </div>
@@ -314,15 +337,18 @@
           };
         };
         //YOUR TURN: add your Mapbox token
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYXJwaXRhMjUwOSIsImEiOiJja2dibnVxenQwMHUxMnptZjJjZ2dqNnRpIn0.k-hGdFzGPxjJ1CbQP10D3w'; //Mapbox token
+        mapboxgl.accessToken = 'pk.eyJ1IjoieGlhbmd5dWdpcyIsImEiOiJja2ZlaHV0c2QwNTNlMnRuYjRjbTYxeXFtIn0.cGUreWEZThxryiB2ppiCgw'; //Mapbox token
+
+
+
         var map = new mapboxgl.Map({
           container: 'map', // container id
-          style: 'mapbox://styles/mapbox/light-v10', //stylesheet location
-          center: [-95.7129, 37.0902], // starting position
+          style: 'mapbox://styles/xiangyugis/ckidp44hb2gwf19p9oqb38phy', //stylesheet location
+          center: [-106.9585507,41.2225205],
+           // starting position
           zoom: 3,// starting zoom
           transformRequest: transformRequest
         });
-
         $(document).ready(function () {
           $.ajax({
             type: "GET",
@@ -331,9 +357,6 @@
             dataType: "text",
             success: function (csvData) { makeGeoJSON(csvData); }
           });
-
-
-
           function makeGeoJSON(csvData) {
             csv2geojson.csv2geojson(csvData, {
               latfield: 'Latitude',
@@ -341,7 +364,6 @@
               delimiter: ','
             }, function (err, data) {
               map.on('load', function () {
-
                 //Add the the layer to the map
                 map.addLayer({
                   'id': 'csvData',
@@ -351,12 +373,10 @@
                     'data': data
                   },
                   'paint': {
-                    'circle-radius': 5,
-                    'circle-color': "Red"
+                    'circle-radius': 2.5,
+                    'circle-color': "Orange"
                   }
                 });
-
-
                 // When a click event occurs on a feature in the csvData layer, open a popup at the
                 // location of the feature, with description HTML from its properties.
                 map.on('click', 'csvData', function (e) {
@@ -393,15 +413,16 @@
                 });
 
                 var bbox = turf.bbox(data);
-                map.fitBounds(bbox, { padding: 50 });
+                map.fitBounds([
+                    [-133.2421875, 16.972741],
+                    [-47.63671875, 52.696361]
+                  ]);
 
               });
 
             });
           };
         });
-
-
 
 
     </script>
