@@ -72,7 +72,7 @@
         background:#fff;
         border-bottom:1px solid #eee;
         min-height:60px;
-        line-height:60px;
+        line-height:30px;
         padding:0 10px;
         background-color: #FAFAFA;
         color: #000000;
@@ -271,6 +271,23 @@
       #buttonReport{
         text-align: center;
       }
+      .fakeLegend{
+        width:25px;
+        height: auto;
+
+      }
+      #legendLayout{
+        text-align: center;
+        padding-bottom: 30px;
+      }
+      h2 {
+        font-size:20px;
+        margin:0;
+        font-weight:400;
+        line-height: 20px;
+        padding: 20px 2px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -312,6 +329,13 @@
       <div class='heading'>
         <h1>Description</h1>
         <p>This data is showing the chapter locations of American Red Cross. This data was added to aid The American Red Cross in making decisions for improving response and providing relief for Wildfires and Hurricanes in the United States.
+          <h2>Legend</h2>
+          <p id="legendLayout">
+            <img class="fakeLegend" src="LegendChapter.png" alt="red cross logo"/>     American Red Cross Chapter <br />
+            <img class="fakeLegend" src="LegendRegion.png" alt="red cross logo"/>     American Red Cross Region
+          <br />
+        </p>
+
           <br />Use the button below to update chapter site information.
         </p>
         <p id="buttonReport">

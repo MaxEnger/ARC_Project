@@ -58,6 +58,14 @@
         padding: 20px 2px;
         text-align: center;
       }
+      h2 {
+        font-size:20px;
+        margin:0;
+        font-weight:400;
+        line-height: 20px;
+        padding: 20px 2px;
+        text-align: center;
+      }
 
       a {
         color:#404040;
@@ -72,8 +80,8 @@
         background:#fff;
         border-bottom:1px solid #eee;
         min-height:60px;
-        line-height:60px;
-        padding:0 10px;
+        line-height:30px;
+        padding:0 5px;
         background-color: #FAFAFA;
         color: #000000;
       }
@@ -81,13 +89,13 @@
       .listings {
         height:100%;
         overflow:auto;
-        padding-bottom:60px;
+        padding-bottom:30px;
       }
 
       .listings .item {
         display:block;
         border-bottom:1px solid #eee;
-        padding:10px;
+        padding:5px;
         text-decoration:none;
       }
 
@@ -287,6 +295,15 @@
       #buttonReport{
         text-align: center;
       }
+      .fakeLegend{
+        width:25px;
+        height: auto;
+
+      }
+      #legendLayout{
+        text-align: center;
+        padding-bottom: 30px;
+      }
     </style>
   </head>
   <body>
@@ -325,8 +342,13 @@
       <div class='heading'>
         <h1>Description</h1>
         <p>This output represnets the currently effected areas within the United States by Hurricanes and Wildfires. Map that uses hosted GeoJSON files for data. Click on icons to know more about the affected areas!</p>
-
-        <p><br />
+        <h2>Legend</h2>
+        <p id="legendLayout">
+          <img class="fakeLegend" src="LegendIncident.png" alt="red cross logo"/>     Incident <br />
+          <img class="fakeLegend" src="LegendRegion.png" alt="red cross logo"/>     American Red Cross Region
+        <br />
+      </p>
+        <p>
           Aware of an incident that is not showing on the map? Use the button below to update the missing incident information on a Googlesheet, and it will show up on the map after refreshing the page!
         </p>
         <p id="buttonReport">
@@ -423,7 +445,7 @@
             //Add the the layer to the map
             map.addLayer({
               'id': 'csvData',
-              'type': 'circle',
+              'type': 'cicle',
               'source': {
                 'type': 'geojson',
                 'data': data
